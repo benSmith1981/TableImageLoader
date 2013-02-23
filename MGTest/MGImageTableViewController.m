@@ -6,18 +6,20 @@
 //  Copyright (c) 2012 Mobgen. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "MGImageTableViewController.h"
+#import "AFXMLRequestOperation.h"
+#import "MGTBXMLTraverser.h"
 
-@interface ViewController () <UITableViewDataSource> {
+@interface MGImageTableViewController () <UITableViewDataSource> 
 
-}
-
+@property (nonatomic,retain) MGTBXMLTraverser *MGtbxmlTraverser;
 @property (nonatomic, assign) UITableView *tableView;
 
 @end
 
-@implementation ViewController
+@implementation MGImageTableViewController
 @synthesize tableView = _tableView;
+@synthesize MGtbxmlTraverser = _MGtbxmlTraverser;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
@@ -31,9 +33,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+//    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.wigtastic.com/MobGenImages/ImageManifest.xml"]];
+//    AFXMLRequestOperation *operation = [AFXMLRequestOperation XMLParserRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, NSXMLParser *XMLParser) {
+//    } failure:nil];
+//    [operation start];
+    
+    _MGtbxmlTraverser = [[MGTBXMLTraverser alloc]init];
 
+    
     [self.view addSubview:self.tableView];
 }
+
+
 
 - (void)viewDidUnload {
     [super viewDidUnload];
@@ -79,6 +90,8 @@
     [super dealloc];
     [_tableView release];
     _tableView = nil;
+    [_MGtbxmlTraverser release];
+    _MGtbxmlTraverser = nil;
 }
 
 @end
