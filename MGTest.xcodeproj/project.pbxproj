@@ -29,7 +29,16 @@
 		B5DD07FB16D94F0100E05613 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B5DD07F116D94F0100E05613 /* AFXMLRequestOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B5DD07FC16D94F0100E05613 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = B5DD07F316D94F0100E05613 /* UIImageView+AFNetworking.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B5DD07FF16D94F3200E05613 /* MGAFNetworkingInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = B5DD07FE16D94F3200E05613 /* MGAFNetworkingInterface.m */; };
-		B5DD080416D9592E00E05613 /* loading.png in Resources */ = {isa = PBXBuildFile; fileRef = B5DD080316D9592E00E05613 /* loading.png */; };
+		B5DD080916D9A45E00E05613 /* MGTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5DD080816D9A45C00E05613 /* MGTableViewCell.m */; };
+		B5DD080B16D9A4AC00E05613 /* MGTableViewCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5DD080A16D9A4AB00E05613 /* MGTableViewCell_iPhone.xib */; };
+		B5DD080D16D9A4C900E05613 /* MGTableViewCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5DD080C16D9A4C600E05613 /* MGTableViewCell_iPad.xib */; };
+		B5DD081116D9A66900E05613 /* loading.png in Resources */ = {isa = PBXBuildFile; fileRef = B5DD080F16D9A66900E05613 /* loading.png */; };
+		B5DD081216D9A66900E05613 /* rightArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = B5DD081016D9A66900E05613 /* rightArrow.png */; };
+		B5DD081616D9B0C400E05613 /* MGDetailImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5DD081416D9B0BD00E05613 /* MGDetailImageViewController.m */; };
+		B5DD081716D9B0C400E05613 /* MGDetailImageViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5DD081516D9B0C100E05613 /* MGDetailImageViewController_iPad.xib */; };
+		B5DD081916D9B11800E05613 /* MGDetailImageViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5DD081816D9B11700E05613 /* MGDetailImageViewController_iPhone.xib */; };
+		B5DD081C16D9D27D00E05613 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DD081B16D9D27C00E05613 /* SystemConfiguration.framework */; };
+		B5DD081E16D9D28500E05613 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DD081D16D9D28400E05613 /* MobileCoreServices.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,9 +80,20 @@
 		B5DD07F316D94F0100E05613 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
 		B5DD07FD16D94F3200E05613 /* MGAFNetworkingInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGAFNetworkingInterface.h; sourceTree = "<group>"; };
 		B5DD07FE16D94F3200E05613 /* MGAFNetworkingInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGAFNetworkingInterface.m; sourceTree = "<group>"; };
-		B5DD080316D9592E00E05613 /* loading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loading.png; sourceTree = "<group>"; };
 		B5DD080516D966FE00E05613 /* MGConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGConstants.h; sourceTree = "<group>"; };
 		B5DD080616D9790800E05613 /* ParsingComplete.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParsingComplete.h; sourceTree = "<group>"; };
+		B5DD080716D9A45B00E05613 /* MGTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGTableViewCell.h; sourceTree = "<group>"; };
+		B5DD080816D9A45C00E05613 /* MGTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGTableViewCell.m; sourceTree = "<group>"; };
+		B5DD080A16D9A4AB00E05613 /* MGTableViewCell_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MGTableViewCell_iPhone.xib; sourceTree = "<group>"; };
+		B5DD080C16D9A4C600E05613 /* MGTableViewCell_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MGTableViewCell_iPad.xib; sourceTree = "<group>"; };
+		B5DD080F16D9A66900E05613 /* loading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loading.png; sourceTree = "<group>"; };
+		B5DD081016D9A66900E05613 /* rightArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rightArrow.png; sourceTree = "<group>"; };
+		B5DD081316D9B0BB00E05613 /* MGDetailImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGDetailImageViewController.h; sourceTree = "<group>"; };
+		B5DD081416D9B0BD00E05613 /* MGDetailImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGDetailImageViewController.m; sourceTree = "<group>"; };
+		B5DD081516D9B0C100E05613 /* MGDetailImageViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MGDetailImageViewController_iPad.xib; sourceTree = "<group>"; };
+		B5DD081816D9B11700E05613 /* MGDetailImageViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MGDetailImageViewController_iPhone.xib; sourceTree = "<group>"; };
+		B5DD081B16D9D27C00E05613 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		B5DD081D16D9D28400E05613 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +101,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5DD081E16D9D28500E05613 /* MobileCoreServices.framework in Frameworks */,
+				B5DD081C16D9D27D00E05613 /* SystemConfiguration.framework in Frameworks */,
 				5B4B9A6316821FC500470EE5 /* UIKit.framework in Frameworks */,
 				5B4B9A6516821FC500470EE5 /* Foundation.framework in Frameworks */,
 				5B4B9A6716821FC500470EE5 /* CoreGraphics.framework in Frameworks */,
@@ -93,6 +115,8 @@
 		5B4B9A5316821FC500470EE5 = {
 			isa = PBXGroup;
 			children = (
+				B5DD081D16D9D28400E05613 /* MobileCoreServices.framework */,
+				B5DD081B16D9D27C00E05613 /* SystemConfiguration.framework */,
 				5B4B9A6816821FC500470EE5 /* MGTest */,
 				5B4B9A6116821FC500470EE5 /* Frameworks */,
 				5B4B9A5F16821FC500470EE5 /* Products */,
@@ -126,7 +150,15 @@
 				B5DD080516D966FE00E05613 /* MGConstants.h */,
 				5B4B9A7A16821FC500470EE5 /* MGImageTableViewController.h */,
 				5B4B9A7B16821FC500470EE5 /* MGImageTableViewController.m */,
+				B5DD081316D9B0BB00E05613 /* MGDetailImageViewController.h */,
+				B5DD081416D9B0BD00E05613 /* MGDetailImageViewController.m */,
+				B5DD081516D9B0C100E05613 /* MGDetailImageViewController_iPad.xib */,
+				B5DD081816D9B11700E05613 /* MGDetailImageViewController_iPhone.xib */,
 				B5DD080616D9790800E05613 /* ParsingComplete.h */,
+				B5DD080716D9A45B00E05613 /* MGTableViewCell.h */,
+				B5DD080816D9A45C00E05613 /* MGTableViewCell.m */,
+				B5DD080A16D9A4AB00E05613 /* MGTableViewCell_iPhone.xib */,
+				B5DD080C16D9A4C600E05613 /* MGTableViewCell_iPad.xib */,
 				5B4B9A7D16821FC500470EE5 /* MGImageTableViewController_iPhone.xib */,
 				5B4B9A8016821FC500470EE5 /* MGImageTableViewController_iPad.xib */,
 				5B4B9A6916821FC500470EE5 /* Supporting Files */,
@@ -137,7 +169,7 @@
 		5B4B9A6916821FC500470EE5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				B5DD080316D9592E00E05613 /* loading.png */,
+				B5DD080E16D9A66800E05613 /* Assets */,
 				5B4B9A6A16821FC500470EE5 /* MGTest-Info.plist */,
 				5B4B9A6B16821FC500470EE5 /* InfoPlist.strings */,
 				5B4B9A6E16821FC500470EE5 /* main.m */,
@@ -183,6 +215,15 @@
 				B5DD07F316D94F0100E05613 /* UIImageView+AFNetworking.m */,
 			);
 			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+		B5DD080E16D9A66800E05613 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				B5DD080F16D9A66900E05613 /* loading.png */,
+				B5DD081016D9A66900E05613 /* rightArrow.png */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,7 +283,12 @@
 				5B4B9A7916821FC500470EE5 /* Default-568h@2x.png in Resources */,
 				5B4B9A7F16821FC500470EE5 /* MGImageTableViewController_iPhone.xib in Resources */,
 				5B4B9A8216821FC500470EE5 /* MGImageTableViewController_iPad.xib in Resources */,
-				B5DD080416D9592E00E05613 /* loading.png in Resources */,
+				B5DD080B16D9A4AC00E05613 /* MGTableViewCell_iPhone.xib in Resources */,
+				B5DD080D16D9A4C900E05613 /* MGTableViewCell_iPad.xib in Resources */,
+				B5DD081116D9A66900E05613 /* loading.png in Resources */,
+				B5DD081216D9A66900E05613 /* rightArrow.png in Resources */,
+				B5DD081716D9B0C400E05613 /* MGDetailImageViewController_iPad.xib in Resources */,
+				B5DD081916D9B11800E05613 /* MGDetailImageViewController_iPhone.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,6 +312,8 @@
 				B5DD07FB16D94F0100E05613 /* AFXMLRequestOperation.m in Sources */,
 				B5DD07FC16D94F0100E05613 /* UIImageView+AFNetworking.m in Sources */,
 				B5DD07FF16D94F3200E05613 /* MGAFNetworkingInterface.m in Sources */,
+				B5DD080916D9A45E00E05613 /* MGTableViewCell.m in Sources */,
+				B5DD081616D9B0C400E05613 /* MGDetailImageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,6 +403,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MGTest/MGTest-Prefix.pch";
 				INFOPLIST_FILE = "MGTest/MGTest-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -366,6 +415,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MGTest/MGTest-Prefix.pch";
 				INFOPLIST_FILE = "MGTest/MGTest-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

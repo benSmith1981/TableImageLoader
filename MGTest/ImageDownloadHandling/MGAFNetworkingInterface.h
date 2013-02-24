@@ -11,7 +11,6 @@
 
 @protocol ParsingComplete;
 /** Created static instance so that this class can be statically called*/
-static id<ParsingComplete>parsingDelegate;
 
 @interface MGAFNetworkingInterface : AFImageRequestOperation
 
@@ -23,4 +22,8 @@ static id<ParsingComplete>parsingDelegate;
  @param id<ParsingComplete> The delegate class to call back
  */
 + (void)setImageManifestProtocol:(id<ParsingComplete>)delegate;
+
++ (void)loadImagesIntoDirectory:(NSArray*)imageURLs;
+
++ (UIImage*) GetSavedImageWithName:(NSString*) aFileName;
 @end

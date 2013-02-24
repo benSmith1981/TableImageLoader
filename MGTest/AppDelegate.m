@@ -11,11 +11,12 @@
 #import "MGImageTableViewController.h"
 
 @implementation AppDelegate
-
+@synthesize  navigationController = _navigationController;
 - (void)dealloc
 {
     [_window release];
     [_viewController release];
+    [_navigationController release];
     [super dealloc];
 }
 
@@ -24,11 +25,12 @@
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        self.viewController = [[[MGImageTableViewController alloc] initWithNibName:@"MGImageTableViewController_iPhone" bundle:nil] autorelease];
+        self.viewController = [[MGImageTableViewController alloc] initWithNibName:@"MGImageTableViewController_iPhone" bundle:nil];
     } else {
-        self.viewController = [[[MGImageTableViewController alloc] initWithNibName:@"MGImageTableViewController_iPad" bundle:nil] autorelease];
+        self.viewController = [[MGImageTableViewController alloc] initWithNibName:@"MGImageTableViewController_iPad" bundle:nil];
     }
-    self.window.rootViewController = self.viewController;
+    self.navigationController = [[UINavigationController alloc] initWithRootViewController:self.viewController];
+    self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
     return YES;
 }
