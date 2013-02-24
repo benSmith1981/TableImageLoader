@@ -39,6 +39,7 @@
 		B5DD081916D9B11800E05613 /* MGDetailImageViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5DD081816D9B11700E05613 /* MGDetailImageViewController_iPhone.xib */; };
 		B5DD081C16D9D27D00E05613 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DD081B16D9D27C00E05613 /* SystemConfiguration.framework */; };
 		B5DD081E16D9D28500E05613 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DD081D16D9D28400E05613 /* MobileCoreServices.framework */; };
+		B5DD082116D9DD2C00E05613 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = B5DD082016D9DD2A00E05613 /* Reachability.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,6 +95,8 @@
 		B5DD081816D9B11700E05613 /* MGDetailImageViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MGDetailImageViewController_iPhone.xib; sourceTree = "<group>"; };
 		B5DD081B16D9D27C00E05613 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B5DD081D16D9D28400E05613 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		B5DD081F16D9DD2900E05613 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		B5DD082016D9DD2A00E05613 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +187,8 @@
 		B5DD07DF16D94F0000E05613 /* ImageDownloadHandling */ = {
 			isa = PBXGroup;
 			children = (
+				B5DD081F16D9DD2900E05613 /* Reachability.h */,
+				B5DD082016D9DD2A00E05613 /* Reachability.m */,
 				B5DD07E016D94F0100E05613 /* AFNetworking */,
 				B5DD07FD16D94F3200E05613 /* MGAFNetworkingInterface.h */,
 				B5DD07FE16D94F3200E05613 /* MGAFNetworkingInterface.m */,
@@ -314,6 +319,7 @@
 				B5DD07FF16D94F3200E05613 /* MGAFNetworkingInterface.m in Sources */,
 				B5DD080916D9A45E00E05613 /* MGTableViewCell.m in Sources */,
 				B5DD081616D9B0C400E05613 /* MGDetailImageViewController.m in Sources */,
+				B5DD082116D9DD2C00E05613 /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,11 +406,13 @@
 		5B4B9A8616821FC500470EE5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ben Smith (6SGW8LESM7)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MGTest/MGTest-Prefix.pch";
 				INFOPLIST_FILE = "MGTest/MGTest-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "31B50E49-9BEE-43EB-9484-5B6174711191";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -412,11 +420,13 @@
 		5B4B9A8716821FC500470EE5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ben Smith (6SGW8LESM7)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MGTest/MGTest-Prefix.pch";
 				INFOPLIST_FILE = "MGTest/MGTest-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "31B50E49-9BEE-43EB-9484-5B6174711191";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

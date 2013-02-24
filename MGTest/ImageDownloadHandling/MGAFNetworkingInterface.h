@@ -26,4 +26,6 @@
 + (void)loadImagesIntoDirectory:(NSArray*)imageURLs;
 
 + (UIImage*) GetSavedImageWithName:(NSString*) aFileName;
+
++ (void)writeImages:(NSString*)imageStringURL DataToFile:(UIImage*)image;
 @end

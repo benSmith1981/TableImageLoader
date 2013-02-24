@@ -14,4 +14,6 @@
  @param NSArray of image urls to be downloaded to display in table
  */
 - (void) sendBackArrayOfImageURLs:(NSArray*)imageURLs;
+
+- (void) reloadTable;
 @end

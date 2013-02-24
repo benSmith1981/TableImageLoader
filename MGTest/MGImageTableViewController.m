@@ -12,6 +12,8 @@
 #import "MGTableViewCell.h"
 #import "MGDetailImageViewController.h"
 #import "AFImageRequestOperation.h"
+#import "Reachability.h"
+
 @interface MGImageTableViewController ()
 {
     int maxImages;
@@ -44,17 +46,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationController.navigationBarHidden = NO;
-    //set initial number of images show to 5
-    maxImages = 5;
-    //turn activity indicator on to show user images are loading
-    AFNetworkActivityIndicatorManager.sharedManager.enabled = YES;
-    //sets this class up to receive delegate call back when JSON is parsed
-    [MGAFNetworkingInterface setImageManifestProtocol:self];
-    //sets off AF networking to parse JSON
-    [MGAFNetworkingInterface jsonRequestInitialiser];
-    _imageURLs =  [[NSArray alloc]init];
-    _images = [[NSMutableArray alloc]init];
+
+    if ([self checkInternet]) {
+        //set initial number of images show to 5
+        maxImages = 5;
+        //turn activity indicator on to show user images are loading
+        AFNetworkActivityIndicatorManager.sharedManager.enabled = YES;
+        //sets this class up to receive delegate call back when JSON is parsed
+        [MGAFNetworkingInterface setImageManifestProtocol:self];
+        //sets off AF networking to parse JSON
+        [MGAFNetworkingInterface jsonRequestInitialiser];
+        _imageURLs =  [[NSArray alloc]init];
+        _images = [[NSMutableArray alloc]init];
+    }
+
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -139,18 +144,29 @@
     }
 
 //    NSLog(@"%@",[[_imageURLs objectAtIndex:indexPath.row] lastPathComponent]);
-//    UIImage *tempImage = [self GetSavedImageWithName:[[_imageURLs objectAtIndex:indexPath.row] lastPathComponent]];
+//    UIImage *tempImage = [MGAFNetworkingInterface GetSavedImageWithName:[[_imageURLs objectAtIndex:indexPath.row] lastPathComponent]];
 //    if (tempImage) {
-//        [cell setMGImage:[[UIImageView alloc] initWithImage:tempImage]];
+//        cell.MGImage.image = tempImage;
 //    }
 //    else
 //    {
-//        [cell setMGImage:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"loading.png"]]];
+//        cell.MGImage.image = [UIImage imageNamed:@"loading.png"];
 //    }
 
+    NSURLRequest *request = [[NSURLRequest alloc]initWithURL:[NSURL URLWithString:[_imageURLs objectAtIndex:indexPath.row]]];
+    [cell.MGImage setImageWithURLRequest:request placeholderImage:[UIImage imageNamed:@"loading.png"]
+                                 success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                     cell.MGImage.image = image;
+                                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+                                         [MGAFNetworkingInterface writeImages:[_imageURLs objectAtIndex:indexPath.row] DataToFile:image];
+                                     });
+                                     NSLog(@"%@",[[_imageURLs objectAtIndex:indexPath.row] lastPathComponent]);
+                                 } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                     NSLog(@"%@",error.description);
+                                 }];
     //go get the images from the server, or load them if already downloaded
-    [cell.MGImage setImageWithURL:[NSURL URLWithString:[_imageURLs objectAtIndex:indexPath.row]]
-                 placeholderImage:[UIImage imageNamed:@"loading"]];
+//    [cell.MGImage setImageWithURL:[NSURL URLWithString:[_imageURLs objectAtIndex:indexPath.row]]
+//                 placeholderImage:[UIImage imageNamed:@"loading"]];
     return cell;
 }
 
@@ -169,8 +185,10 @@
     }
     //Get image stored in documents directory
     UIImage *tempImage = [MGAFNetworkingInterface GetSavedImageWithName:[[_imageURLs objectAtIndex:indexPath.row] lastPathComponent]];
+//    UIImage *tempImage = [_images objectAtIndex:indexPath.row];
     //set image in detail view
     [detailImageVC setFullsizeImage:[[UIImageView alloc] initWithImage:tempImage]];
+    //[detailImageVC.fullsizeImage setImageWithURL:[NSURL URLWithString:[_imageURLs objectAtIndex:indexPath.row]] placeholderImage:[UIImage imageNamed:@"loading"]];
     //push detail view
     [self.navigationController pushViewController:detailImageVC animated:YES];
 }
@@ -180,10 +198,12 @@
 {
     _imageURLs = [[NSArray alloc]initWithArray:imageURLs];
     [_imageListTable reloadData];
-
-    [MGAFNetworkingInterface loadImagesIntoDirectory:_imageURLs];
 }
 
+- (void) reloadTable
+{
+    [_imageListTable reloadData];
+}
 #pragma mark Image Loading
 
 - (IBAction)loadMoreImages:(id)sender {
@@ -192,7 +212,46 @@
         maxImages = [_imageURLs count];
     }
     [_imageListTable reloadData];
-    
-    [MGAFNetworkingInterface loadImagesIntoDirectory:_imageURLs];
+
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        [MGAFNetworkingInterface loadImagesIntoDirectory:_imageURLs];
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [_imageListTable reloadData];
+//        });
+//    });
+}
+
+#pragma REACHIBILITY METHODS
+- (BOOL) connectedToNetwork
+{
+	Reachability *r = [Reachability reachabilityWithHostName:@"www.google.co.uk"];
+	NetworkStatus internetStatus = [r currentReachabilityStatus];
+	BOOL internet;
+	if ((internetStatus != ReachableViaWiFi) && (internetStatus != ReachableViaWWAN)) {
+		internet = NO;
+	} else {
+		internet = YES;
+	}
+	return internet;
+}
+
+-(BOOL) checkInternet
+{
+	//Make sure we have internet connectivity
+	if([self connectedToNetwork] != YES)
+	{
+        UIAlertView *alert = nil;
+
+        alert = [[UIAlertView alloc] initWithTitle:@"No Network Connectivity!"
+                                           message:@"No network connection found. An Internet connection is required for this application to work" delegate:nil
+                                 cancelButtonTitle:@"Ok"
+                                 otherButtonTitles:nil, nil];
+        [alert show];
+        
+		return NO;
+	}
+	else {
+		return YES;
+	}
 }
 @end

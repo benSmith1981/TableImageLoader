@@ -52,10 +52,10 @@ static id<ParsingComplete>parsingDelegate;
                      imageRequestOperationWithRequest:request
                                  imageProcessingBlock:nil
                                               success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                                                  // Save Image
-                                                  NSData *imageData = UIImageJPEGRepresentation(image, 90);
-                                                  //write to documents directory
-                                                  [imageData writeToFile:[NSString stringWithFormat:@"%@%@",[self getOurImageDirectory],[imageStringURL lastPathComponent]] atomically:YES];
+                                                      // Save Image
+                                                      NSData *imageData = UIImageJPEGRepresentation(image, 90);
+                                                      //write to documents directory
+                                                      [imageData writeToFile:[NSString stringWithFormat:@"%@%@",[self getOurImageDirectory],[imageStringURL lastPathComponent]] atomically:YES];
                                               }
                                               failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
                                                   NSLog(@"%@", [error localizedDescription]);
@@ -72,13 +72,21 @@ static id<ParsingComplete>parsingDelegate;
     }
 }
 
++ (void)writeImages:(NSString*)imageStringURL DataToFile:(UIImage*)image
+{
+    // Save Image
+    NSData *imageData = UIImageJPEGRepresentation(image, 90);
+    //write to documents directory
+    [imageData writeToFile:[NSString stringWithFormat:@"%@%@",[self getOurImageDirectory],[imageStringURL lastPathComponent]] atomically:YES];
+}
+
 + (NSString*)getOurImageDirectory
 {
     // Get dir
     NSString *documentsDirectory = nil;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     documentsDirectory = [paths objectAtIndex:0];
-    NSString *pathString = [NSString stringWithFormat:@"%@/MGImages/",documentsDirectory];
+    NSString *pathString = [NSString stringWithFormat:@"%@/",documentsDirectory];
     return pathString;
 }
 
@@ -102,4 +110,6 @@ static id<ParsingComplete>parsingDelegate;
     
     return [image autorelease];
 }
+
+
 @end

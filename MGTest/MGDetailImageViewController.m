@@ -29,9 +29,7 @@
 {
     [super viewDidLoad];
     [_imageScrollView setContentSize:_fullsizeImage.frame.size];
-    //_imageScrollView.frame = _fullsizeImage.frame;
     [_imageScrollView addSubview:_fullsizeImage];
-    // Do any additional setup after loading the view from its nib.
 }
 
 - (void)didReceiveMemoryWarning
