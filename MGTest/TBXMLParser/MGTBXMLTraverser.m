@@ -9,15 +9,17 @@
 #import "MGTBXMLTraverser.h"
 
 @interface MGTBXMLTraverser()
-@property(nonatomic,retain) TBXMLSuccessBlock successBlock;
-@property(nonatomic,retain) TBXMLFailureBlock failureBlock;
+{
+//TBXMLSuccessBlock _successBlock;
+//TBXMLFailureBlock _failureBlock;
+}
 @property(nonatomic,retain) TBXML *tbxml;
 @end
 
 @implementation MGTBXMLTraverser
 @synthesize tbxml = _tbxml;
-@synthesize successBlock = _successBlock;
-@synthesize failureBlock = _failureBlock;
+//@synthesize successBlock = _successBlock;
+//@synthesize failureBlock = _failureBlock;
 
 - (id)init
 {
@@ -25,42 +27,40 @@
     if (self) {
         // Custom initialization
         // Create a success block to be called when the async request completes
-        _successBlock = ^(TBXML *tbxmlDocument) {
+        TBXMLSuccessBlock _successBlock = ^(TBXML *tbxmlDocument) {
             // If TBXML found a root node, process element and iterate all children
             if (tbxmlDocument.rootXMLElement)
                 [self traverseElement:tbxmlDocument.rootXMLElement];
         };
         
         // Create a failure block that gets called if something goes wrong
-        _failureBlock = ^(TBXML *tbxmlDocument, NSError * error) {
+        TBXMLFailureBlock _failureBlock = ^(TBXML *tbxmlDocument, NSError * error) {
             NSLog(@"Error! %@ %@", [error localizedDescription], [error userInfo]);
         };
+
+        // Initialize TBXML with the URL of an XML doc. TBXML asynchronously loads and parses the file.
+        _tbxml = [[TBXML alloc] initWithURL:[NSURL URLWithString:@"http://www.wigtastic.com/MobGenImages/ImageManifest.xml"]
+                                    success:_successBlock
+                                    failure:_failureBlock];
     }
     return self;
 }
 
-- (void)ParseTBXML
+- (void)dealloc
 {
-    
-    // Initialize TBXML with the URL of an XML doc. TBXML asynchronously loads and parses the file.
-    TBXML *tbxml = [[TBXML alloc] initWithURL:[NSURL URLWithString:@"http://www.wigtastic.com/MobGenImages/ImageManifest.xml"]
-                                      success:_successBlock
-                                      failure:_failureBlock];
+    [super dealloc];
+    [_tbxml release];
+    _tbxml = nil;
+//    [_successBlock release];
+//    _successBlock = nil;
+//    [_failureBlock release];
+//    _failureBlock = nil;
 }
 
-- (void)loadUnknownXML {
-    NSError *error = nil;
-    
-    // Load and parse the books.xml file
-    _tbxml = [TBXML tbxmlWithXMLFile:@"books.xml" error:&error];
-    
-    if (error) {
-        NSLog(@"%@ %@", [error localizedDescription], [error userInfo]);
-    } else {
-        // If TBXML found a root node, process element and iterate all children
-        if (_tbxml.rootXMLElement)
-            [self traverseElement:_tbxml.rootXMLElement];
-    }
+- (void)ParseTBXML
+{
+
+
 }
 
 - (void) traverseElement:(TBXMLElement *)element {

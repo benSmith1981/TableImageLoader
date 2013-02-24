@@ -1,4 +1,3 @@
 #xcode specific
 build/*
-*.xcuserdatad
 *.DS_Store

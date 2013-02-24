@@ -7,44 +7,41 @@
 //
 
 #import "MGImageTableViewController.h"
-#import "AFXMLRequestOperation.h"
-#import "MGTBXMLTraverser.h"
+#import "AFNetworking.h"
+#import "MGAFNetworkingInterface.h"
 
-@interface MGImageTableViewController () <UITableViewDataSource> 
-
-@property (nonatomic,retain) MGTBXMLTraverser *MGtbxmlTraverser;
-@property (nonatomic, assign) UITableView *tableView;
-
+@interface MGImageTableViewController ()
+{
+    int maxImages;
+}
+/** Local property array to store the image urls to display in the table*/
+@property (nonatomic,retain) NSArray* imageURLs;
 @end
 
 @implementation MGImageTableViewController
-@synthesize tableView = _tableView;
-@synthesize MGtbxmlTraverser = _MGtbxmlTraverser;
+@synthesize imageListTable = _imageListTable;
+@synthesize imageURLs = _imageURLs;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-        _tableView.dataSource = self;
-    }
-    
+    self = [super initWithNibName:nibNameOrNil bundle:nil];
     return self;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.wigtastic.com/MobGenImages/ImageManifest.xml"]];
-//    AFXMLRequestOperation *operation = [AFXMLRequestOperation XMLParserRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, NSXMLParser *XMLParser) {
-//    } failure:nil];
-//    [operation start];
-    
-    _MGtbxmlTraverser = [[MGTBXMLTraverser alloc]init];
-
-    
-    [self.view addSubview:self.tableView];
+    //sets this class up to receive delegate call back when JSON is parsed
+    maxImages = 5;
+    [MGAFNetworkingInterface setImageManifestProtocol:self];
+    //sets off AF networking to parse JSON
+    [MGAFNetworkingInterface jsonRequestInitialiser];
+    _imageURLs =  [[NSArray alloc]init];
 }
 
-
+- (void)viewDidAppear:(BOOL)animated
+{
+    [_imageListTable reloadData];
+}
 
 - (void)viewDidUnload {
     [super viewDidUnload];
@@ -57,8 +54,13 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewWillLayoutSubviews {
-    self.tableView.frame = self.view.frame;
+- (void)dealloc
+{
+    [super dealloc];
+    [_imageListTable release];
+    _imageListTable = nil;
+    [_imageURLs release];
+    _imageURLs = nil;
 }
 
 #pragma mark - Table view
@@ -68,30 +70,42 @@
 }
 
 - (int)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 42;
+    if ([_imageURLs count]) {
+        return maxImages;
+    }
+    else
+        return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     UITableViewCell *cell = nil;
     
-    cell = [_tableView dequeueReusableCellWithIdentifier:@"reuseID"];
+    cell = [_imageListTable dequeueReusableCellWithIdentifier:@"reuseID"];
 
-    if (!cell) {
+    if (!cell)
+    {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-        cell.textLabel.text = [[NSString alloc] initWithFormat:@"Image %d", indexPath.row];
+        NSLog(@"%@",[_imageURLs objectAtIndex:indexPath.row]);
+        NSURL *url = [[NSURL alloc] initWithString:[_imageURLs objectAtIndex:indexPath.row]];
+        [cell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"loading"]];
     }
     
     return cell;
 }
-
-- (void)dealloc
+#pragma mark ImageParsingComplete Protocol method
+- (void) sendBackArrayOfImageURLs:(NSArray*)imageURLs;
 {
-    [super dealloc];
-    [_tableView release];
-    _tableView = nil;
-    [_MGtbxmlTraverser release];
-    _MGtbxmlTraverser = nil;
+    _imageURLs = [[NSArray alloc]initWithArray:imageURLs];
+    [_imageListTable reloadData];
 }
 
+
+- (IBAction)loadMoreImages:(id)sender {
+    maxImages +=5;
+    if (maxImages >= [_imageURLs count]) {
+        maxImages = [_imageURLs count];
+    }
+    [_imageListTable reloadData];
+}
 @end

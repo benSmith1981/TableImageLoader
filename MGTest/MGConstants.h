@@ -1,0 +1,1 @@
+#define imageManifestJSON @"http://www.wigtastic.com/MobGenImages/ImageManifest.json"

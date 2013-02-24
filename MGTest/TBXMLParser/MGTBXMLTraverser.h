@@ -9,5 +9,5 @@
 #import "TBXML.h"
 #import "TBXML+HTTP.h"
 @interface MGTBXMLTraverser : TBXML
-
+- (void)ParseTBXML;
 @end

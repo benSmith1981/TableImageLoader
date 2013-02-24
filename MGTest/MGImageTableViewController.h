@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MGImageTableViewController : UIViewController
+#import "ParsingComplete.h"
+@interface MGImageTableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate,ParsingComplete>
+
+/** This is the UITableView to show all images */
+@property (nonatomic,strong) IBOutlet UITableView *imageListTable;
+- (IBAction)loadMoreImages:(id)sender;
 
 @end
