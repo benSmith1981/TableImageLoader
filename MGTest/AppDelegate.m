@@ -12,11 +12,16 @@
 
 @implementation AppDelegate
 @synthesize  navigationController = _navigationController;
+@synthesize window = _window;
+@synthesize viewController = _viewController;
 - (void)dealloc
 {
     [_window release];
+    _window = nil;
     [_viewController release];
+    _viewController = nil;
     [_navigationController release];
+    _navigationController = nil;
     [super dealloc];
 }
 
@@ -29,9 +34,9 @@
     } else {
         self.viewController = [[MGImageTableViewController alloc] initWithNibName:@"MGImageTableViewController_iPad" bundle:nil];
     }
-    self.navigationController = [[UINavigationController alloc] initWithRootViewController:self.viewController];
-    self.window.rootViewController = self.navigationController;
-    [self.window makeKeyAndVisible];
+    self.navigationController = [[UINavigationController alloc] initWithRootViewController:_viewController];
+    _window.rootViewController = _navigationController;
+    [_window makeKeyAndVisible];
     return YES;
 }
 
@@ -60,6 +65,11 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation: (UIInterfaceOrientation)interfaceOrientation
+{
+    return YES;
 }
 
 @end

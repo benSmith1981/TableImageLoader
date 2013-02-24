@@ -31,21 +31,21 @@
 				<string key="IBProxiedObjectIdentifier">IBFirstResponder</string>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
-			<object class="IBUIView" id="382989656">
+			<object class="IBUIView" id="757357609">
 				<reference key="NSNextResponder"/>
-				<int key="NSvFlags">292</int>
+				<int key="NSvFlags">256</int>
 				<array class="NSMutableArray" key="NSSubviews">
-					<object class="IBUIScrollView" id="1061187662">
-						<reference key="NSNextResponder" ref="382989656"/>
-						<int key="NSvFlags">268</int>
+					<object class="IBUIScrollView" id="970518045">
+						<reference key="NSNextResponder" ref="757357609"/>
+						<int key="NSvFlags">274</int>
 						<array class="NSMutableArray" key="NSSubviews"/>
 						<string key="NSFrameSize">{320, 416}</string>
-						<reference key="NSSuperview" ref="382989656"/>
+						<reference key="NSSuperview" ref="757357609"/>
 						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
-						<object class="IBUIScreenMetrics" key="IBUISimulatedDestinationMetrics" id="833368086">
+						<object class="IBUIScreenMetrics" key="IBUISimulatedDestinationMetrics" id="703217096">
 							<string key="IBUISimulatedSizeMetricsClass">IBUIScreenMetrics</string>
 							<object class="NSMutableDictionary" key="IBUINormalizedOrientationToSizeMap">
 								<bool key="EncodedWithXMLCoder">YES</bool>
@@ -68,7 +68,7 @@
 				<string key="NSFrame">{{0, 64}, {320, 416}}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="1061187662"/>
+				<reference key="NSNextKeyView" ref="970518045"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -81,7 +81,7 @@
 				<object class="IBUISimulatedNavigationBarMetrics" key="IBUISimulatedTopBarMetrics">
 					<bool key="IBUIPrompted">NO</bool>
 				</object>
-				<reference key="IBUISimulatedDestinationMetrics" ref="833368086"/>
+				<reference key="IBUISimulatedDestinationMetrics" ref="703217096"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 		</array>
@@ -91,7 +91,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">view</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="382989656"/>
+						<reference key="destination" ref="757357609"/>
 					</object>
 					<int key="connectionID">23</int>
 				</object>
@@ -99,7 +99,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">imageScrollView</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="1061187662"/>
+						<reference key="destination" ref="970518045"/>
 					</object>
 					<int key="connectionID">24</int>
 				</object>
@@ -125,18 +125,18 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">22</int>
-						<reference key="object" ref="382989656"/>
+						<reference key="object" ref="757357609"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="1061187662"/>
+							<reference ref="970518045"/>
 						</array>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">MGDetailImageViewController</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">10</int>
-						<reference key="object" ref="1061187662"/>
+						<reference key="object" ref="970518045"/>
 						<array class="NSMutableArray" key="children"/>
-						<reference key="parent" ref="382989656"/>
+						<reference key="parent" ref="757357609"/>
 					</object>
 				</array>
 			</object>

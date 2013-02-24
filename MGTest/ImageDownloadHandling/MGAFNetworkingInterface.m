@@ -9,11 +9,23 @@
 #import "MGAFNetworkingInterface.h"
 #import "AFJSONRequestOperation.h"
 #import "MGConstants.h"
-static id<ParsingComplete>parsingDelegate;
+#import "AFNetworking.h"
+#import "MGAFNetworkingInterface.h"
+
+static id<ParsingCompleteProtocol>parsingDelegate;
 
 @interface MGAFNetworkingInterface ()
+
+/**Returns the image directory path that we store our images in
+ @return NSString The image directory path for images
+ */
 + (NSString*)getOurImageDirectory;
 
+/**Writes the image data to a specific file location in our documents directory for later retrieval
+ @param NSString This is the image path in documents directory
+ @param UIImage This is the image we want to save there
+ */
++ (void)writeImages:(NSString*)imageStringURL DataToFile:(UIImage*)image;
 @end
 
 @implementation MGAFNetworkingInterface
@@ -26,58 +38,58 @@ static id<ParsingComplete>parsingDelegate;
                                         JSONRequestOperationWithRequest:request
                                                                 success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
                                                                         NSLog(@"%@", JSON);
-                                                                    NSDictionary *temp = [JSON objectForKey:@"image-manifest"];
-                                                                    NSArray *images = [temp objectForKey:@"images"];
+                                                                        //Get the image manifest dictionary
+                                                                        NSDictionary *temp = [JSON objectForKey:@"image-manifest"];
+                                                                        //Get the images array from dictionary
+                                                                        NSArray *images = [temp objectForKey:@"images"];
+                                                                        //Call to send back Image URLS array to delegate
                                                                         [parsingDelegate sendBackArrayOfImageURLs:images];
                                                                     }
                                                                 failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-                                                                    NSLog(@"Request Failed with Error: %@, %@", error, error.userInfo);
+                                                                        NSLog(@"Request Failed with Error: %@, %@", error, error.userInfo);
                                                                 }];
     [operation start];
+    [request release];
+    [url release];
 
 }
 
-+ (void)setImageManifestProtocol:(id<ParsingComplete>)delegate
++ (void)requestImageForCell:(MGTableViewCell*)cell atRow:(int)row withImageURLS:(NSArray*)imageURLs
+{
+    NSURL *url = [[NSURL alloc]initWithString:[imageURLs objectAtIndex:row]];
+    NSURLRequest *request = [[NSURLRequest alloc]initWithURL:url];
+    [cell.MGImage setImageWithURLRequest:request placeholderImage:[UIImage imageNamed:@"loading.png"]
+                                 success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image)
+                                     {
+                                         cell.MGImage.image = image;
+                                         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+                                             [self writeImages:[imageURLs objectAtIndex:row] DataToFile:image];
+                                         });
+                                         NSLog(@"%@",[[imageURLs objectAtIndex:row] lastPathComponent]);
+                                     }
+                                 failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error)
+                                     {
+                                         NSLog(@"%@",error.description);
+                                     }];
+    [request release];
+    [url release];
+}
+
++ (void)setImageManifestProtocol:(id<ParsingCompleteProtocol>)delegate
 {
     parsingDelegate = delegate;
 }
 
-+ (void)loadImagesIntoDirectory:(NSArray*)imageURLs
-{
-    for (NSString *imageStringURL in imageURLs) {
-        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:imageStringURL]];
-        
-        AFImageRequestOperation *operation;
-        operation = [AFImageRequestOperation
-                     imageRequestOperationWithRequest:request
-                                 imageProcessingBlock:nil
-                                              success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                                                      // Save Image
-                                                      NSData *imageData = UIImageJPEGRepresentation(image, 90);
-                                                      //write to documents directory
-                                                      [imageData writeToFile:[NSString stringWithFormat:@"%@%@",[self getOurImageDirectory],[imageStringURL lastPathComponent]] atomically:YES];
-                                              }
-                                              failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                                                  NSLog(@"%@", [error localizedDescription]);
-                                                  UIAlertView *alert = [[UIAlertView alloc]
-                                                                        initWithTitle: @"Error Downloading Image"
-                                                                        message: [NSString stringWithFormat:@"%@",error.description]
-                                                                        delegate: nil
-                                                                        cancelButtonTitle:@"OK"
-                                                                        otherButtonTitles:nil];
-                                                  [alert show];
-                                                  [alert release];
-                                              }];
-        [operation start];
-    }
-}
-
 + (void)writeImages:(NSString*)imageStringURL DataToFile:(UIImage*)image
 {
-    // Save Image
-    NSData *imageData = UIImageJPEGRepresentation(image, 90);
-    //write to documents directory
-    [imageData writeToFile:[NSString stringWithFormat:@"%@%@",[self getOurImageDirectory],[imageStringURL lastPathComponent]] atomically:YES];
+    //if image doesn't exist then save it in documents directory
+    if (![self doesImageExist:imageStringURL])
+    {
+        // Save Image
+        NSData *imageData = UIImageJPEGRepresentation(image, 90);
+        //write to documents directory
+        [imageData writeToFile:[NSString stringWithFormat:@"%@%@",[self getOurImageDirectory],[imageStringURL lastPathComponent]] atomically:YES];
+    }
 }
 
 + (NSString*)getOurImageDirectory
@@ -90,22 +102,20 @@ static id<ParsingComplete>parsingDelegate;
     return pathString;
 }
 
-+ (UIImage*) GetSavedImageWithName:(NSString*) aFileName
++ (BOOL)doesImageExist:(NSString*)imageName
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *str = [NSString stringWithFormat:@"%@%@",[self getOurImageDirectory],aFileName];
-    BOOL success = [fileManager fileExistsAtPath:str];
-    
-    UIImage* image = nil;
-    image = [[UIImage alloc] initWithContentsOfFile:str];
-    
-    if(!success)
+    NSString *str = [NSString stringWithFormat:@"%@%@",[self getOurImageDirectory],imageName];
+    return [fileManager fileExistsAtPath:str];
+}
+
++ (UIImage*) getSavedImageWithName:(NSString*) imageName
+{
+    UIImage* image = [UIImage imageNamed:@"no_image.jpg"];
+    if([self doesImageExist:imageName])
     {
-        return nil;
-    }
-    else
-    {
-        image = [[UIImage alloc] initWithContentsOfFile:str];
+        NSString *fullImagePath = [NSString stringWithFormat:@"%@%@",[self getOurImageDirectory],imageName];
+        image = [[UIImage alloc] initWithContentsOfFile:fullImagePath];
     }
     
     return [image autorelease];

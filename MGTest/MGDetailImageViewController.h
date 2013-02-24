@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface MGDetailImageViewController : UIViewController
-@property (retain, nonatomic) IBOutlet UIScrollView *imageScrollView;
-@property(nonatomic,retain)UIImageView *fullsizeImage;
+/** This is the scroll that image is displayed in if it is too big for view so we can see all of it*/
+@property (nonatomic,retain) IBOutlet UIScrollView *imageScrollView;
+/** This is the full size image that is displayed on the detail view*/
+@property (nonatomic,retain) UIImageView *fullsizeImage;
 @end

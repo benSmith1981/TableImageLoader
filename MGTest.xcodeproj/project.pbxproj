@@ -39,7 +39,9 @@
 		B5DD081916D9B11800E05613 /* MGDetailImageViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5DD081816D9B11700E05613 /* MGDetailImageViewController_iPhone.xib */; };
 		B5DD081C16D9D27D00E05613 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DD081B16D9D27C00E05613 /* SystemConfiguration.framework */; };
 		B5DD081E16D9D28500E05613 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DD081D16D9D28400E05613 /* MobileCoreServices.framework */; };
-		B5DD082116D9DD2C00E05613 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = B5DD082016D9DD2A00E05613 /* Reachability.m */; };
+		B5DD082516DA846700E05613 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = B5DD082416DA846700E05613 /* Reachability.m */; };
+		B5DD082816DA848200E05613 /* MGReachabilityCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = B5DD082716DA848200E05613 /* MGReachabilityCheck.m */; };
+		B5DD082E16DA8F4500E05613 /* no_image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B5DD082D16DA8F4500E05613 /* no_image.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,7 +84,7 @@
 		B5DD07FD16D94F3200E05613 /* MGAFNetworkingInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGAFNetworkingInterface.h; sourceTree = "<group>"; };
 		B5DD07FE16D94F3200E05613 /* MGAFNetworkingInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGAFNetworkingInterface.m; sourceTree = "<group>"; };
 		B5DD080516D966FE00E05613 /* MGConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGConstants.h; sourceTree = "<group>"; };
-		B5DD080616D9790800E05613 /* ParsingComplete.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParsingComplete.h; sourceTree = "<group>"; };
+		B5DD080616D9790800E05613 /* ParsingCompleteProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParsingCompleteProtocol.h; sourceTree = "<group>"; };
 		B5DD080716D9A45B00E05613 /* MGTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGTableViewCell.h; sourceTree = "<group>"; };
 		B5DD080816D9A45C00E05613 /* MGTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGTableViewCell.m; sourceTree = "<group>"; };
 		B5DD080A16D9A4AB00E05613 /* MGTableViewCell_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MGTableViewCell_iPhone.xib; sourceTree = "<group>"; };
@@ -95,8 +97,11 @@
 		B5DD081816D9B11700E05613 /* MGDetailImageViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MGDetailImageViewController_iPhone.xib; sourceTree = "<group>"; };
 		B5DD081B16D9D27C00E05613 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B5DD081D16D9D28400E05613 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		B5DD081F16D9DD2900E05613 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		B5DD082016D9DD2A00E05613 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		B5DD082316DA846700E05613 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		B5DD082416DA846700E05613 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		B5DD082616DA848200E05613 /* MGReachabilityCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGReachabilityCheck.h; sourceTree = "<group>"; };
+		B5DD082716DA848200E05613 /* MGReachabilityCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGReachabilityCheck.m; sourceTree = "<group>"; };
+		B5DD082D16DA8F4500E05613 /* no_image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = no_image.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +152,7 @@
 		5B4B9A6816821FC500470EE5 /* MGTest */ = {
 			isa = PBXGroup;
 			children = (
+				B5DD082216DA846300E05613 /* Reachability */,
 				B5DD07DF16D94F0000E05613 /* ImageDownloadHandling */,
 				5B4B9A7116821FC500470EE5 /* AppDelegate.h */,
 				5B4B9A7216821FC500470EE5 /* AppDelegate.m */,
@@ -157,7 +163,7 @@
 				B5DD081416D9B0BD00E05613 /* MGDetailImageViewController.m */,
 				B5DD081516D9B0C100E05613 /* MGDetailImageViewController_iPad.xib */,
 				B5DD081816D9B11700E05613 /* MGDetailImageViewController_iPhone.xib */,
-				B5DD080616D9790800E05613 /* ParsingComplete.h */,
+				B5DD080616D9790800E05613 /* ParsingCompleteProtocol.h */,
 				B5DD080716D9A45B00E05613 /* MGTableViewCell.h */,
 				B5DD080816D9A45C00E05613 /* MGTableViewCell.m */,
 				B5DD080A16D9A4AB00E05613 /* MGTableViewCell_iPhone.xib */,
@@ -187,8 +193,6 @@
 		B5DD07DF16D94F0000E05613 /* ImageDownloadHandling */ = {
 			isa = PBXGroup;
 			children = (
-				B5DD081F16D9DD2900E05613 /* Reachability.h */,
-				B5DD082016D9DD2A00E05613 /* Reachability.m */,
 				B5DD07E016D94F0100E05613 /* AFNetworking */,
 				B5DD07FD16D94F3200E05613 /* MGAFNetworkingInterface.h */,
 				B5DD07FE16D94F3200E05613 /* MGAFNetworkingInterface.m */,
@@ -225,10 +229,22 @@
 		B5DD080E16D9A66800E05613 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				B5DD082D16DA8F4500E05613 /* no_image.jpg */,
 				B5DD080F16D9A66900E05613 /* loading.png */,
 				B5DD081016D9A66900E05613 /* rightArrow.png */,
 			);
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		B5DD082216DA846300E05613 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				B5DD082316DA846700E05613 /* Reachability.h */,
+				B5DD082416DA846700E05613 /* Reachability.m */,
+				B5DD082616DA848200E05613 /* MGReachabilityCheck.h */,
+				B5DD082716DA848200E05613 /* MGReachabilityCheck.m */,
+			);
+			path = Reachability;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -294,6 +310,7 @@
 				B5DD081216D9A66900E05613 /* rightArrow.png in Resources */,
 				B5DD081716D9B0C400E05613 /* MGDetailImageViewController_iPad.xib in Resources */,
 				B5DD081916D9B11800E05613 /* MGDetailImageViewController_iPhone.xib in Resources */,
+				B5DD082E16DA8F4500E05613 /* no_image.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,7 +336,8 @@
 				B5DD07FF16D94F3200E05613 /* MGAFNetworkingInterface.m in Sources */,
 				B5DD080916D9A45E00E05613 /* MGTableViewCell.m in Sources */,
 				B5DD081616D9B0C400E05613 /* MGDetailImageViewController.m in Sources */,
-				B5DD082116D9DD2C00E05613 /* Reachability.m in Sources */,
+				B5DD082516DA846700E05613 /* Reachability.m in Sources */,
+				B5DD082816DA848200E05613 /* MGReachabilityCheck.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,7 +430,7 @@
 				INFOPLIST_FILE = "MGTest/MGTest-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "31B50E49-9BEE-43EB-9484-5B6174711191";
+				PROVISIONING_PROFILE = "A54EC7C9-4AEC-4AA8-9152-3D739D102647";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -426,7 +444,7 @@
 				INFOPLIST_FILE = "MGTest/MGTest-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "31B50E49-9BEE-43EB-9484-5B6174711191";
+				PROVISIONING_PROFILE = "A54EC7C9-4AEC-4AA8-9152-3D739D102647";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

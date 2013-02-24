@@ -33,9 +33,9 @@
 			</object>
 			<object class="IBUIView" id="766721923">
 				<reference key="NSNextResponder"/>
-				<int key="NSvFlags">292</int>
+				<int key="NSvFlags">256</int>
 				<array class="NSMutableArray" key="NSSubviews">
-					<object class="IBUIScrollView" id="930398035">
+					<object class="IBUIScrollView" id="798160026">
 						<reference key="NSNextResponder" ref="766721923"/>
 						<int key="NSvFlags">274</int>
 						<string key="NSFrameSize">{768, 1004}</string>
@@ -78,7 +78,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">imageScrollView</string>
 						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="930398035"/>
+						<reference key="destination" ref="798160026"/>
 					</object>
 					<int key="connectionID">15</int>
 				</object>
@@ -106,13 +106,13 @@
 						<int key="objectID">2</int>
 						<reference key="object" ref="766721923"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="930398035"/>
+							<reference ref="798160026"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">13</int>
-						<reference key="object" ref="930398035"/>
+						<reference key="object" ref="798160026"/>
 						<reference key="parent" ref="766721923"/>
 					</object>
 				</array>
