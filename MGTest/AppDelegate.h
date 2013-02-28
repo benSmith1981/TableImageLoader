@@ -12,9 +12,9 @@
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
-@property (strong, nonatomic) UIWindow *window;
+@property (retain, nonatomic) UIWindow *window;
 
-@property (strong, nonatomic) MGImageTableViewController *viewController;
-@property (strong, nonatomic) UINavigationController *navigationController;
+@property (retain, nonatomic) MGImageTableViewController *viewController;
+@property (retain, nonatomic) UINavigationController *navigationController;
 
 @end

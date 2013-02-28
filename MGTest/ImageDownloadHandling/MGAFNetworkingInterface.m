@@ -111,14 +111,17 @@ static id<ParsingCompleteProtocol>parsingDelegate;
 
 + (UIImage*) getSavedImageWithName:(NSString*) imageName
 {
-    UIImage* image = [UIImage imageNamed:@"no_image.jpg"];
+    UIImage* image = nil;
     if([self doesImageExist:imageName])
     {
         NSString *fullImagePath = [NSString stringWithFormat:@"%@%@",[self getOurImageDirectory],imageName];
-        image = [[UIImage alloc] initWithContentsOfFile:fullImagePath];
+        image = [[[UIImage alloc] initWithContentsOfFile:fullImagePath] autorelease];
+    }
+    else {
+        image = [UIImage imageNamed:@"no_image.jpg"];
     }
     
-    return [image autorelease];
+    return image;
 }
 
 

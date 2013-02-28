@@ -28,15 +28,29 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+    
+    MGImageTableViewController* rootViewController = nil;
+    
     // Override point for customization after application launch.
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        self.viewController = [[MGImageTableViewController alloc] initWithNibName:@"MGImageTableViewController_iPhone" bundle:nil];
+        rootViewController = [[MGImageTableViewController alloc] initWithNibName:@"MGImageTableViewController_iPhone" bundle:nil];
     } else {
-        self.viewController = [[MGImageTableViewController alloc] initWithNibName:@"MGImageTableViewController_iPad" bundle:nil];
+        rootViewController = [[MGImageTableViewController alloc] initWithNibName:@"MGImageTableViewController_iPad" bundle:nil];
     }
-    self.navigationController = [[UINavigationController alloc] initWithRootViewController:_viewController];
-    _window.rootViewController = _navigationController;
+    
+    self.viewController = rootViewController;
+    
+    [rootViewController release];
+    
+    UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:self.viewController];
+    
+    self.navigationController = nav;
+    
+    [nav release];
+    
+    _window.rootViewController = self.navigationController;
     [_window makeKeyAndVisible];
+    
     return YES;
 }
 

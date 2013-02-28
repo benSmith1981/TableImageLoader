@@ -155,27 +155,44 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MGDetailImageViewController *detailImageVC;
+    MGDetailImageViewController *detailImageVC = nil;
+/* Retain count 0 */
 
     //load detail view dependent on type of device
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
     {
         detailImageVC = [[MGDetailImageViewController alloc]initWithNibName:@"MGDetailImageViewController_iPhone" bundle:nil];
+        /* Retain count 1 */
+
     }
     else
     {
         detailImageVC = [[MGDetailImageViewController alloc]initWithNibName:@"MGDetailImageViewController_iPad" bundle:nil];
+        /* Retain count 1 */
+
     }
     //Get image stored in documents directory
     UIImage *tempImage = [MGAFNetworkingInterface getSavedImageWithName:[[_imageURLs objectAtIndex:indexPath.row] lastPathComponent]];
 
+    UIImageView* imageView = [[UIImageView alloc] initWithImage:tempImage];
+    
     //set image in detail view
-    [detailImageVC setFullsizeImage:[[UIImageView alloc] initWithImage:tempImage]];
+    [detailImageVC setFullsizeImage:imageView];
+    
+    [imageView release];
 
     //push detail view
-    [[self navigationController] pushViewController:detailImageVC animated:YES];
+    [self.navigationController pushViewController:detailImageVC animated:YES];
+    /* Retain count 2 */
+
+    
     [detailImageVC release];
+    /* Retain count 1 */
 }
+//
+//NSArray array = [NSArray array]; // Autorelease
+//
+//NSArray array =
 
 #pragma mark ImageParsingComplete Protocol method
 - (void) sendBackArrayOfImageURLs:(NSArray*)imageURLs;
