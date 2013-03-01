@@ -189,10 +189,6 @@
     [detailImageVC release];
     /* Retain count 1 */
 }
-//
-//NSArray array = [NSArray array]; // Autorelease
-//
-//NSArray array =
 
 #pragma mark ImageParsingComplete Protocol method
 - (void) sendBackArrayOfImageURLs:(NSArray*)imageURLs;
